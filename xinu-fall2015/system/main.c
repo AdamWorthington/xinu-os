@@ -9,13 +9,22 @@ int myvictimglobal = 0;
 process	main(void)
 {
 
-
+	/*
 	int victim = create((void *)myvictim, 4096, 20, "myvictim", 0, NULL);
 	int attacker = create((void *)myattacker, 4096, 20, "myattacker", 0, NULL);
 	resume(victim);
 	resume(attacker);
+	*/
 
-	
+	int A = create((void *)printloop, 1024, 20, "A", 1, 'A');
+	int B = create((void *)printloop, 1024, 20, "B", 1, 'B');
+	int C = create((void *)printloop, 1024, 20, "C", 1, 'C');
+	int D = create((void *)printloop, 1024, 20, "D", 1, 'D');
+	resume(A);
+	resume(B);
+	resume(C);
+	resume(D);
+	sleepms(200);
 
 	recvclr();
 	resume(create(shell, 8192, 50, "shell", 1, CONSOLE));
@@ -27,10 +36,7 @@ process	main(void)
 	}
 	return OK;
 
-
-
-
-		/*
+	/*
 	//
 	//sleepms(200);
 	//resume (create((void *)stackdepth, 65536, 20, "stackdepth", 0, NULL));
@@ -42,11 +48,7 @@ process	main(void)
 	//printsegaddress();
 	//stackdepth();
 
-	int A = create((void *)printnoloop, 1024, 24, "A", 1, 'A');
-	int B = create((void *)printnoloop, 1024, 23, "B", 1, 'B');
-	int C = create((void *)printnoloop, 1024, 22, "C", 1, 'C');
-	int D = create((void *)printnoloop, 1024, 21, "D", 1, 'D');
-
+	
 	//kprintf("\n______________________\n\n");
 	//sleepms(200);
 	resume(A);

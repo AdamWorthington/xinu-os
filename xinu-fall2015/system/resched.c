@@ -23,11 +23,15 @@ void	resched(void)		/* Assumes interrupts are disabled	*/
 	}
 
 	/* Point to process table entry for the current (old) process */
-
+	uint32 curr_time = clktimefine;
 	ptold = &proctab[currpid];
+	uint32 last_time = ptold->prcpustart;
+	uint32 total_time = ptold->prcpuused;
+	ptold->prcpuused = total_time + (curr_time - last_time);
 
 	if (ptold->prstate == PR_CURR) {  /* Process remains eligible */
 		if (ptold->prprio > firstkey(readylist)) {
+			ptold->prcpustart = curr_time;
 			return;
 		}
 
@@ -43,15 +47,16 @@ void	resched(void)		/* Assumes interrupts are disabled	*/
 	ptnew = &proctab[currpid];
 	ptnew->prstate = PR_CURR;
 	preempt = QUANTUM;		/* Reset time slice for process	*/
-	uint32 start_time = clktimefine;
+
+	ptnew->prcpustart = curr_time;
+
 	ctxsw(&ptold->prstkptr, &ptnew->prstkptr);
-	uint32 end_time = clktimefine;
-	uint32 total_time = end_time - start_time;
-	ptnew->prcpuused = ptnew->prcpuused + total_time;
+
 	/* Old process returns here when resumed */
 	//sleepms(50);
 	//kprintf("Time used by %s: %d\n", currpid, ptnew->prcpuused);
 	//sleepms(50);
+
 	return;
 }
 

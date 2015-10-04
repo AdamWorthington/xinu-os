@@ -152,7 +152,7 @@ static	void	sysinit()
 		prptr->prname[0] = NULLCH;
 		prptr->prstkbase = NULL;
 		prptr->prprio = 0;
-		prptr->prcpuused = 0;
+		prptr->prcpuused = 1;
 	}
 
 	/* Initialize the Null process entry */	
