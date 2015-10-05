@@ -35,8 +35,8 @@ SYSTEM_CFILES =                                                                 
 	signal.c      signaln.c     sleep.c       stacktrace.c  suspend.c       \
 	unsleep.c     userret.c     wait.c        wakeup.c      write.c         \
 	xdone.c       yield.c       lab0app1.c    lab0app2.c    printsegaddress.c \
-	stackdepth.c  printloop.c   printnoloop.c myvictim.c    myattacker.c
-
+	stackdepth.c  printloop.c   printnoloop.c myvictim.c    myattacker.c \
+	insertNI.c
 SRC_CFILES   += ${SYSTEM_CFILES}
 SRC_SFILES   += ${SYSTEM_SFILES}
 SYSTEM_CFULL += ${SYSTEM_CFILES:%=../system/%}
@@ -416,6 +416,8 @@ binaries/myvictim.o:           ../system/myvictim.c
 	${CC} ${CFLAGS} -o binaries/myvictim.o ../system/myvictim.c
 binaries/myattacker.o:           ../system/myattacker.c
 	${CC} ${CFLAGS} -o binaries/myattacker.o ../system/myattacker.c
+binaries/insertNI.o:           ../system/insertNI.c
+	${CC} ${CFLAGS} -o binaries/insertNI.o ../system/insertNI.c
 	
 #------------------------------------------------------------------
 #  Rules for files in directory ../lib

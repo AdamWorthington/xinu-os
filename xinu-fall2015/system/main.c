@@ -15,7 +15,7 @@ process	main(void)
 	resume(victim);
 	resume(attacker);
 	*/
-
+	/*
 	int A = create((void *)printloop, 1024, 20, "A", 1, 'A');
 	int B = create((void *)printloop, 1024, 20, "B", 1, 'B');
 	int C = create((void *)printloop, 1024, 20, "C", 1, 'C');
@@ -25,6 +25,11 @@ process	main(void)
 	resume(C);
 	resume(D);
 	sleepms(200);
+	*/
+	resume(create((void *)cpuintensive, 1024, 1, "1", 0, NULL));
+	resume(create((void *)cpuintensive, 1024, 1, "2", 0, NULL));
+	resume(create((void *)cpuintensive, 1024, 1, "3", 0, NULL));
+	resume(create((void *)cpuintensive, 1024, 1, "4", 0, NULL));
 
 	recvclr();
 	resume(create(shell, 8192, 50, "shell", 1, CONSOLE));

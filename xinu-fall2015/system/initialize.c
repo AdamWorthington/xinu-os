@@ -152,7 +152,12 @@ static	void	sysinit()
 		prptr->prname[0] = NULLCH;
 		prptr->prstkbase = NULL;
 		prptr->prprio = 0;
-		prptr->prcpuused = 1;
+		if(i == 0){
+			prptr->prcpuused = MAXKEY;
+		}
+		else{
+			prptr->prcpuused = 1;
+		}
 	}
 
 	/* Initialize the Null process entry */	

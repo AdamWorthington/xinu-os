@@ -27,10 +27,12 @@ void	resched(void)		/* Assumes interrupts are disabled	*/
 	ptold = &proctab[currpid];
 	uint32 last_time = ptold->prcpustart;
 	uint32 total_time = ptold->prcpuused;
-	ptold->prcpuused = total_time + (curr_time - last_time);
+	if(currpid != 0){
+		ptold->prcpuused = total_time + (curr_time - last_time);
+	}
 
 	if (ptold->prstate == PR_CURR) {  /* Process remains eligible */
-		if (ptold->prprio > firstkey(readylist)) {
+		if (ptold->prcpuused < firstkey(readylist)) {
 			ptold->prcpustart = curr_time;
 			return;
 		}
