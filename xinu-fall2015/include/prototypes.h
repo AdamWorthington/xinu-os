@@ -1,3 +1,5 @@
+extern void iointensive(void);
+
 extern void cpuintensive(void);
 
 extern status insertNI(pid32 pid, qid16 q, uint32 key);

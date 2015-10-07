@@ -28,8 +28,8 @@ process	main(void)
 	*/
 	resume(create((void *)cpuintensive, 1024, 1, "1", 0, NULL));
 	resume(create((void *)cpuintensive, 1024, 1, "2", 0, NULL));
-	resume(create((void *)cpuintensive, 1024, 1, "3", 0, NULL));
-	resume(create((void *)cpuintensive, 1024, 1, "4", 0, NULL));
+	resume(create((void *)iointensive, 1024, 1, "3", 0, NULL));
+	resume(create((void *)iointensive, 1024, 1, "4", 0, NULL));
 
 	recvclr();
 	resume(create(shell, 8192, 50, "shell", 1, CONSOLE));
